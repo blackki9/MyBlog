@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const Post = require("../models/post");
 
+//TODO handling errors
+
 router.get("/", (req,res) => {
     Post.find( (err, posts) => {
         if (err) {
@@ -26,6 +28,7 @@ router.get("/:id", (req,res) => {
 router.post("/", (req,res) => {
     const blogPost = req.body;
 
+    // TODO validation
     const post = new Post();
     post.title = blogPost.title;
     post.text = blogPost.text;
@@ -40,7 +43,25 @@ router.post("/", (req,res) => {
 });
 
 router.put("/:id", (req,res) => {
-    res.json({success: "not implemented yet"});
+    const id = req.params.id;
+    Post.findById(id, (err, foundPost) => {
+        if (err) {
+            res.send(err);
+        }
+
+        const title = req.body.title;
+        const text = req.body.text;
+
+        if (title) {
+            foundPost.title = title;
+        }
+
+        if (text) {
+            foundPost.text = text;
+        }
+
+        res.json(foundPost);
+    });
 });
 
 router.delete("/:id", (req,res) => {
