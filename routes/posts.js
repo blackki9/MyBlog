@@ -65,7 +65,14 @@ router.put("/:id", (req,res) => {
 });
 
 router.delete("/:id", (req,res) => {
-    res.json({success: "not implemented yet"});
+    const id = req.params.id;
+    Post.findByIdAndRemove(id, (err) => {
+        if (err) {
+            res.send(err);
+        }
+
+        res.json({message: "Post was deleted"});
+    })
 });
 
 module.exports = router;
