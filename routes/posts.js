@@ -15,8 +15,12 @@ router.post("/", (req,res) => {
     res.send({success: "true"});
 });
 
-router.delete("/:id", (req,res) => {
+router.put("/:id", (req,res) => {
+    res.send({success: "not implemented yet"});
+});
 
+router.delete("/:id", (req,res) => {
+    res.send({success: "not implemented yet"});
 });
 
 module.exports = router;
