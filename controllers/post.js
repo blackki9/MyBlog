@@ -56,7 +56,15 @@ exports.updatePost = (req,res) => {
             foundPost.text = text;
         }
 
-        res.json(foundPost);
+        foundPost.save((err,savedPost) => {
+            if (err) {
+                res.send(err);
+            }
+            else {
+                res.json(foundPost);
+            }
+        })
+
     });
 };
 
