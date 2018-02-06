@@ -23,7 +23,10 @@ exports.getPostById = (req,res) => {
 
 exports.createNewPost = (req,res) => {
     const blogPost = req.body;
-
+    if (!blogPost.title || !blogPost.text) {
+        res.send({error: "You should provide title and text"});
+        return;
+    }
     // TODO validation
     const post = new Post();
     post.title = blogPost.title;
@@ -56,7 +59,15 @@ exports.updatePost = (req,res) => {
             foundPost.text = text;
         }
 
-        res.json(foundPost);
+        foundPost.save((err,savedPost) => {
+            if (err) {
+                res.send(err);
+            }
+            else {
+                res.json(foundPost);
+            }
+        })
+
     });
 };
 
