@@ -1,7 +1,6 @@
 const express = require('express');
-
 const router = express.Router();
+const userController = require('../controllers/user');
 
-usersRouter.route('/')
+router.route('/')
     .post(userController.postUsers)
-    .get(userController.getUsers);

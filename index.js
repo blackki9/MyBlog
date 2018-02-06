@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const postsRouter = require("./routes/posts");
 const usersRouter = require('./routes/users');
 const keys = require('./config/keys');
+const passport = require('passport');
 
 //app configurations
 
@@ -13,6 +14,9 @@ mongoose.connect(keys.mongoURI);
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+
+app.use(passport.initialize());
+
 //Routing
 app.get("/", (req, res) => {
     res.json({error:"Unsupported"});
