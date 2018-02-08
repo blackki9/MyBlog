@@ -6,8 +6,15 @@ exports.getAllPosts = (req,res) => {
         if (err) {
             res.send(err);
         }
-        
-        res.json(posts);
+        const postsToSend = posts.map((post) => {
+            return {
+                postId: post._id,
+                text: post.text,
+                title: post.title,
+                createdAt: post.createdAt
+            }
+        })
+        res.json(postsToSend);
     });
 };
 
