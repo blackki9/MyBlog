@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const authController = require('./auth');
 
 exports.postUsers = (req,res) => {
     const user = new User({
@@ -8,7 +9,7 @@ exports.postUsers = (req,res) => {
 
     user.save((err) => {
         if (err) {
-            res.send(err);
+            return res.send(err);
         }
 
         res.json({message: "User created"});
@@ -24,4 +25,8 @@ exports.getUsers = (req,res) => {
 
         res.json(users);
     });
+};
+
+exports.getUserInfo = (req, res) => {
+    res.send({username: req.user.username, userId: req.user._id});
 };

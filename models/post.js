@@ -2,7 +2,9 @@ const mongoose = require("mongoose");
 
 const PostSchema = new mongoose.Schema({
    title: String,
-   text: String
+   text: String,
+   createdAt: Number,
+   userId: String
 });
 
 module.exports = mongoose.model('Post', PostSchema);

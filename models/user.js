@@ -13,7 +13,7 @@ const UserSchema = new mongoose.Schema( {
     }
 });
 
-UserSchema.pre('save', (callback) => {
+UserSchema.pre('save', function(callback) {
     const user = this;
 
     if (!user.isModified('password')) return callback;
@@ -34,7 +34,7 @@ UserSchema.pre('save', (callback) => {
     })
 });
 
-UserSchema.methods.verifyPassword = (password, cb) => {
+UserSchema.methods.verifyPassword = function(password, cb) {
     bcrypt.compare(password, this.password, (err, isMatch) => {
         if (err) {
             return cb(err);

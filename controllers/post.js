@@ -1,11 +1,12 @@
 const Post = require("../models/post");
+const moment = require('moment');
 
 exports.getAllPosts = (req,res) => {
     Post.find( (err, posts) => {
         if (err) {
             res.send(err);
         }
-
+        
         res.json(posts);
     });
 };
@@ -31,6 +32,8 @@ exports.createNewPost = (req,res) => {
     const post = new Post();
     post.title = blogPost.title;
     post.text = blogPost.text;
+    post.userId = req.user._id;
+    post.createdAt = moment().unix();
 
     post.save( (err) => {
         if (err) {
