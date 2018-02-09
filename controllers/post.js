@@ -6,7 +6,8 @@ const postToShowPost = (post) => {
         postId: post._id,
         text: post.text,
         title: post.title,
-        createdAt: post.createdAt
+        createdAt: post.createdAt,
+        userId: post.userId
     }
 }
 
