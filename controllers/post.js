@@ -16,7 +16,7 @@ exports.getAllPosts = (req,res) => {
             res.send(err);
         }
         const postsToSend = posts.map(postToShowPost)
-        res.json(postsToSend);
+        res.json({posts: postsToSend});
     });
 };
 
